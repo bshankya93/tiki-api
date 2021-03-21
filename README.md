@@ -1,8 +1,8 @@
 # tiki-api
 TIKI.VN API (Unofficial)
 
-#Example
-##Get ID Product from link
+# Example
+## Get ID Product from link
 ```
 tiki = Tiki_API()
 product = tiki.get_id("https://tiki.vn/ta-lot-ve-sinh-cho-meo-co-mui-huong-sumiho-cong-nghe-y-p31884922.html")
@@ -11,7 +11,7 @@ Response
 ```
 {'status': True, 'product_id' 31884922}
 ```
-##Get product details
+## Get product details
 ```
 tiki = Tiki_API()
 product = tiki.get_id("https://tiki.vn/ta-lot-ve-sinh-cho-meo-co-mui-huong-sumiho-cong-nghe-y-p31884922.html")
