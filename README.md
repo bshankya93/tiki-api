@@ -11,6 +11,12 @@ Response
 ```
 {'status': True, 'product_id' 31884922}
 ```
+
+## Get Category
+```
+tiki = Tiki_API()
+product = tiki.get_category(id, page, limit)
+```
 ## Get product details
 ```
 tiki = Tiki_API()
