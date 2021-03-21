@@ -3,11 +3,13 @@ import json
 
 class Tiki_API:
     def __init__(self):
-       self.headers = {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:86.0) Gecko/20100101 Firefox/86.0'
+        self.headers = {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:86.0) Gecko/20100101 Firefox/86.0',
+          'TE': 'Trailers'
         }
-       self.string_id = "tikivn://products/"
-       self.detail_url = url = "https://tiki.vn/api/v2/products/{}?platform=web&spid={}&include=tag,images,gallery,promotions,badges,stock_item,variants,product_links,discount_tag,ranks,breadcrumbs,top_features,cta_desktop"
+        self.string_id = "tikivn://products/"
+        self.detail_url = "https://tiki.vn/api/v2/products/{}?platform=web&spid={}&include=tag,images,gallery,promotions,badges,stock_item,variants,product_links,discount_tag,ranks,breadcrumbs,top_features,cta_desktop"
+        self.category_url = "https://tiki.vn/api/v2/products?category={}&page={}&limit={}"
     def get_id(self, url):
         payload={}
         response = requests.request("GET", url, headers=self.headers, data=payload)
@@ -37,3 +39,19 @@ class Tiki_API:
             return {'status': True, 'data': data}
         else:
             return {'status': False}
+    def get_category(self, id_c, page = 1, limit = 300):
+        
+        url = self.category_url.format(id_c,page,limit)
+        
+        payload={}
+        response = requests.request("GET", url, headers=self.headers, data=payload)
+        
+        if(response.status_code == 200):
+            data = json.loads(response.text)
+            if(len(data['data']) == 0):
+               return {'status': False}
+            return {'status': True, 'data': data['data'], 'paging': data['paging']}
+        else:
+            return {'status': False}
+        
+                
