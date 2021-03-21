@@ -1,4 +1,4 @@
-mport requests
+import requests
 import json
 
 class Tiki_API:
@@ -24,8 +24,10 @@ class Tiki_API:
             return {'status': True, 'product_id': pdid}
         else:
             return {'status': False}
-    def get_product(self, id_product):
-        url = self.detail_url.format(id_product, id_product)
+    def get_product(self, id_product, sub_id = -1):
+        if(sub_id == -1):
+            sub_id = id_product
+        url = self.detail_url.format(id_product, sub_id)
         payload={}
         response = requests.request("GET", url, headers=self.headers, data=payload)
 
