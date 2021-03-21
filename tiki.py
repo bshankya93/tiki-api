@@ -1,4 +1,4 @@
-import requests
+mport requests
 import json
 
 class Tiki_API:
@@ -7,7 +7,7 @@ class Tiki_API:
           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:86.0) Gecko/20100101 Firefox/86.0'
         }
        self.string_id = "tikivn://products/"
-       self.detail_url = url = "https://tiki.vn/api/v2/me/recently_viewed?product_id={}&ids={}"
+       self.detail_url = url = "https://tiki.vn/api/v2/products/{}?platform=web&spid={}&include=tag,images,gallery,promotions,badges,stock_item,variants,product_links,discount_tag,ranks,breadcrumbs,top_features,cta_desktop"
     def get_id(self, url):
         payload={}
         response = requests.request("GET", url, headers=self.headers, data=payload)
@@ -32,8 +32,6 @@ class Tiki_API:
         
         if(response.status_code == 200):
             data = json.loads(response.text)
-            return {'status': True, 'data': data['data']}
+            return {'status': True, 'data': data}
         else:
             return {'status': False}
-
-    
